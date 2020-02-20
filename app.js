@@ -34,36 +34,63 @@ class Deck {
     
 
     shuffle () {
+        let currentIndex = this.deck.length, tempVal, randIndex;
 
+        while(0 != currentIndex) {
+            randIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -=1;
+            tempVal = this.deck[currentIndex];
+            this.deck[currentIndex] = this.deck[randIndex];
+            this.deck[randIndex] = tempVal;
+        }
     }
 
-    ui() {
+    deal() {
+        let dealCrad = this.deck.shift();
+        this.dealt_cards.push(dealCrad);
+        //return dealCrad
+        this.ui(dealCrad)
+    }
 
-        let cardToShow = this.deck[15];
+    ui(cardToShow) {
+
         let suitTop = document.querySelector(".card__suit--top");
         let suitBottom = document.querySelector(".card__suit--bottom");
         let cardNum = document.querySelector(".card__number");
         let card = document.querySelector(".card");
-        let symbol,color;
+        let symbol = this.blackORred(cardToShow.suit);
 
-        if(cardToShow.suit === "Clubs") {
-            symbol = '♣';
-            color = 'black';
-        }else if (cardToShow.suit === "Diamonds") {
-            symbol = '♦';
-            color = 'red';
-        }else if (cardToShow.suit === "Spades") {
-            symbol = '♠';
-            color = 'black';
-        }else {
-            symbol = '♥'
-            color = 'red';
-        }
-
-        suitTop.innerHTML = symbol;
-        suitBottom.innerHTML = symbol;
-        card.classList.add(`${color}`)
+        suitTop.innerHTML = symbol.symbol;
+        suitBottom.innerHTML = symbol.symbol;
+        card.classList.add(`${symbol.color}`)
         cardNum.innerHTML = cardToShow.value;
+    }
+
+    //check  the color of the card
+    blackORred(suit) {
+        if(suit === "Clubs") {
+            return{ 
+                symbol: '♣',
+                color: 'black',
+            } 
+        }else if (suit === "Diamonds") {
+            return {
+                symbol: '♦',
+                color: 'red'
+            }
+        }else if (suit === "Spades") {
+            return {
+                symbol: '♠',
+                color: 'black'
+            }
+            
+        }else {
+            return {
+                symbol: '♥',
+                color: 'red'
+            }
+            
+        }
     }
 }
 
@@ -72,4 +99,5 @@ let  deck = new Deck();
 
 deck.generateDeck();
 deck.printDeck()
-deck.ui()
+deck.shuffle()
+deck.deal();
