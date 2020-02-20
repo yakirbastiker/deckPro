@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Deck</title>
+</head>
+<body>
+
+    <div class="card">
+      <div class="card__inner">
+        <div class="card__front">
+          <img src="./card_back.png" alt="back card" width="75px" height="100px">
+        </div>
+
+        <div class="card__back">
+          <span class="card__suit card__suit--top">{{ card.suit }}</span>
+          <span class="card__number">{{ card.rank }} </span>
+          <span class="card__suit card__suit--bottom">{{ card.suit }}</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
