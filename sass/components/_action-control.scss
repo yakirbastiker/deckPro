@@ -1,0 +1,21 @@
+.action__control{
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+
+    &_hit{
+        background-color: green;
+        @include actionControl;
+        // add hover
+    }
+
+    &_stand {
+        background-color: blue;
+        @include actionControl;
+    }
+
+    &_double{
+        background-color: yellow;
+        @include actionControl;
+    }
+}

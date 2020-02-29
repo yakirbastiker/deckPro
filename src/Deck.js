@@ -1,4 +1,4 @@
-class Deck {
+export default class Deck {
     constructor() {
         this.deck = [];
 		this.dealt_cards = [];
@@ -23,11 +23,11 @@ class Deck {
 
     printDeck () {
 		if (this.deck.length === 0) {
-			console.log('Deck has not been generated. Call generate_deck() on deck object before continuing.')
+			// console.log('Deck has not been generated. Call generate_deck() on deck object before continuing.')
 		}
 		else {
 			for ( let c = 0; c < this.deck.length; c++ ) {
-	       			console.log(this.deck[c])
+	       			// console.log(this.deck[c])
 			}
 		}
     }
@@ -54,16 +54,27 @@ class Deck {
 
     ui(cardToShow) {
 
-        let suitTop = document.querySelector(".card__suit--top");
-        let suitBottom = document.querySelector(".card__suit--bottom");
-        let cardNum = document.querySelector(".card__number");
-        let card = document.querySelector(".card");
         let symbol = this.blackORred(cardToShow.suit);
 
-        suitTop.innerHTML = symbol.symbol;
-        suitBottom.innerHTML = symbol.symbol;
-        card.classList.add(`${symbol.color}`)
-        cardNum.innerHTML = cardToShow.value;
+        let cardUI = `<div class="card">
+                        <div class="card__inner">
+                            <div class="card__front">
+                                <img src="./../card_back.png" alt="back card" width="75px" height="100px">
+                            </div>
+  
+                         <div class="card__back">
+                             <span class="card__suit card__suit--top">${symbol.symbol}</span>
+                             <span class="card__number">${cardToShow.value} </span>
+                            <span class="card__suit card__suit--bottom">${symbol.symbol}</span>
+                         </div>
+                        </div>
+                      </div>`;
+
+        //edit where to add innerHTML
+        document.querySelector("body").innerHTML = cardUI;
+
+        let card = document.querySelector(".card");
+        card.classList.add(`${symbol.color}`);
     }
 
     //check  the color of the card
@@ -95,9 +106,5 @@ class Deck {
 }
 
 
-let  deck = new Deck();
 
-deck.generateDeck();
-deck.printDeck()
-deck.shuffle()
-deck.deal();
+
