@@ -1,17 +1,13 @@
 .bet__control {
     border: 1px solid #333;
-    position: fixed; 
-    bottom: 0;
-    right: 0;
     border-radius: 10px;
     width: 120px;
-    background-color: blue;
+    background-color: $color-betControl;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 15px;
     font-size: 2em;
-
     &__rise {
 
 
@@ -19,7 +15,7 @@
             @include btnControl;
 
             &:hover {
-                color: red;
+                color: $color-hover-betcontol;
             }
         }        
     }
@@ -35,7 +31,7 @@
         &-btn{
             @include btnControl;
             &:hover {
-                color: red;
+                color: $color-hover-betcontol;
             }
         }  
     }

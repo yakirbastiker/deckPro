@@ -2,20 +2,29 @@
     display: flex;
     width: 350px;
     justify-content: space-between;
-
+    height: min-content;
+    max-height: 40px;
     &_hit{
-        background-color: green;
+        background-color: $color-hit;
         @include actionControl;
-        // add hover
+        &:hover{
+            transform: translateY(-3px);
+        }
     }
 
     &_stand {
-        background-color: blue;
+        background-color: $color-hover-betcontol;
         @include actionControl;
+        &:hover{
+            transform: translateY(-3px);
+        }
     }
 
     &_double{
-        background-color: yellow;
+        background-color: $color-double-chip;
         @include actionControl;
+        &:hover{
+            transform: translateY(-3px);
+        }
     }
 }

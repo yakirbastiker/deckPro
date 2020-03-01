@@ -1,7 +1,7 @@
 const path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
     entry: './src/game.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -26,5 +26,9 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [new HtmlWebpackPlugin({
+        template: "./index.html"
+    })
+    ]
 }   

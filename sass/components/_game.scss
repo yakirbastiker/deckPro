@@ -1,0 +1,34 @@
+.game{
+    height: 90%;
+    width: 100%;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "dealer  deck"
+                        "player chip";
+}
+
+
+.dealer {
+    grid-area: dealer;
+}
+
+.deck {
+    grid-area: deck;
+
+    & img {
+        width: 300px;
+        // transform: rotate(317deg);
+    }
+}
+
+.player {
+    grid-area: player;
+    display: flex;
+}
+
+.chip {
+    grid-area: chip;
+    display: flex;
+}

@@ -1,0 +1,26 @@
+.controls{
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 10%;
+}
+
+
+.start {
+    background-color: $color-double-chip;
+    border-radius: 20px;
+    text-align: center;
+    width: 60px;
+    height: min-content;
+    max-height: 40px;
+    padding: 10px 20px;
+    transition: all .3s;
+    cursor: pointer;
+    color: #fff;
+
+    &:hover{
+        transform: translateY(-3px);
+    }
+}
