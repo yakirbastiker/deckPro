@@ -45,6 +45,7 @@ export function endOfHand(){
     playingDealer = [];
     deck.removeUI();
     removeChip();
+    deck.checkDeck();
 }
 
 export function playerWonHand(){ 

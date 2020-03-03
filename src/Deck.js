@@ -125,6 +125,14 @@ export default class Deck {
             
         }
     }
+
+    checkDeck(){
+        if(this.deck.length < 10){
+            this.deck = [];
+            this.generateDeck();
+            this.shuffle();
+        }
+    }
 }
 
 
