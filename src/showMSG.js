@@ -9,5 +9,5 @@ export default function (text) {
 
     setTimeout(() => {
         table.removeChild(node)
-    }, 3000);
+    }, 2000);
 }

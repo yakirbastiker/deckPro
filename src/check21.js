@@ -1,37 +1,72 @@
 import { playingUser,  playingDealer } from './variable';
-function check21 (str) {
+import { checkWhoWon } from "./variable";
+import { endOfHand } from "./variable";
+import showMSG from './showMSG';
+import {checkCardValue} from './checkCardValue';
+import { checkAinHand } from './checkAinHand';
+import { playerWonHand } from './variable';
+import { dealerDraw } from "./dealerPlay";
+export function check21 (str) {
     let num = 0;
-    //check 
     if(str === 'user') {
         for(let card =0; card < playingUser.length; card++){
-            num += checkCardValue(playingUser[card]); // get val of card
+            num = num + parseInt(checkCardValue(playingUser[card].value)); 
         }
     }else {
         for(let card =0; card < playingDealer.length; card++){
-            num += checkCardValue(playingDealer[card]);
+            num = num + parseInt(checkCardValue(playingDealer[card].value));
         }
     }
 
     if(str === 'user') {
-        if(num > 21) {
-            console.log('user lose over 21');
-            //check if A in hand to change to 1
+        if(num > 21) { 
+            checkAinHand(str);
+            if(num > 21) {
+                checkAinHand(str);
+                num = 0;
+                for(let card =0; card < playingUser.length; card++){
+                    num = num + parseInt(checkCardValue(playingUser[card].value)); 
+                }
+                if(num > 21) {
+                    showMSG("player lose. over 21");
+                    endOfHand();
+                   
+                }
+
+            }
         }else if(num === 21) {
-            console.log('user blackjeck');
-        }else {
-            console.log('user keep play');
-        }
-    }else {
-        //dealer
-        if(num > 21){
-            console.log('dealer lose over 21');
-        }else if(num === 21) {
-            console.log('dealer blackjeck');
-        }else if(num <= 16) {
-            console.log('dealer take more card');
-        }else {
-            console.log('dealer stand over 17 less 21');
+            showMSG("user have blackjeck !!!");
+            playerWonHand();
+            
         }
     }
-    console.log(num)
+    else {
+        if(num > 21){
+
+            checkAinHand(str);
+            if(num > 21) {
+                checkAinHand(str);
+                num = 0;
+                for(let card =0; card < playingDealer.length; card++){
+                    num = num + parseInt(checkCardValue(playingDealer[card].value)); 
+                }
+                if(num > 21) {
+                    showMSG("Dealer lose over 21, player won the round");
+                    playerWonHand();
+                }
+
+            }
+
+        }else if(num === 21) {
+            showMSG("dealer blackjeck, Player lose the round");
+            endOfHand();  
+        }else if(num <= 16) {
+            setTimeout(() => {
+                dealerDraw();
+            }, 1500);
+        }else {//check for A
+            checkWhoWon();
+        }
+    }
+
 }

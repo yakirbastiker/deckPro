@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Tagesschrift';
+    src: url('tagesschrift.ttf');
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -7,4 +12,5 @@ body {
     box-sizing: border-box;
     height: 100vh;
     background-color: #ccc;
+    font-family: 'Tagesschrift', 'Georgia', serif;
 }

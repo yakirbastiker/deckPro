@@ -1,20 +1,45 @@
+import { playingUser, playerTurn } from './variable';
+import { turnChange } from './variable';
+import { doubleUpdate } from './variable';
+import { dealerStart } from './variable';
+import { deck } from "./game";
+import { check21 } from "./check21";
+import { dealerPlay } from "./dealerPlay";
+import showMSG from './showMSG';
+
 export default function actionControl() {
-    //get element
+
     let btnHit = document.querySelector("#hit");
     let btnStand = document.querySelector("#stand");
     let btnDouble = document.querySelector("#double");
 
-    //add event
-
     btnHit.addEventListener("click", function(){
-        console.log('hit')
+        if(playerTurn) {
+            let nextCard = deck.deal()
+            playingUser.push(nextCard);
+            deck.ui(nextCard, 'user');
+            check21('user');
+        }
     });
 
     btnStand.addEventListener("click", function(){
-        console.log('stand')
+        if(playerTurn) {
+            showMSG("Dealer turn")
+            turnChange();
+            dealerPlay();
+        }
     });
 
     btnDouble.addEventListener("click", function(){
-        console.log('double')
+        if(playerTurn) {
+            showMSG("double!,  Dealer turn")
+            let nextCard = deck.deal()
+            playingUser.push(nextCard);
+            deck.ui(nextCard, 'user');
+            doubleUpdate();
+            check21('user'); 
+            dealerStart();
+        }
+        
     });
 }

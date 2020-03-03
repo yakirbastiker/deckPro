@@ -8,8 +8,7 @@
     max-width: 60px;
     position: relative;
     perspective: 1000px;
-
-
+    
     &__inner {
         
         position: relative;
@@ -18,8 +17,19 @@
         text-align: center;
         transition: transform 0.8s;
         transform-style: preserve-3d;
-        animation: flipCard 2s ease;
-        animation-fill-mode: forwards ;
+        animation: flipCard 1s ease;
+        animation-fill-mode: forwards;
+
+
+        &-back {
+            position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        animation-fill-mode: forwards;
+        }
     }
 
     &__front {

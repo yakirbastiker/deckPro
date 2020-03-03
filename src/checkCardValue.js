@@ -1,4 +1,4 @@
-export default function (card) {
+export  function checkCardValue(card) {
     if(card === 'J' || card === 'Q' || card === 'K') {
         card = 10;
     }else if(card === 'A') {

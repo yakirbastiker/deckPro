@@ -16,16 +16,14 @@
 
 .deck {
     grid-area: deck;
-
-    & img {
-        width: 300px;
-        // transform: rotate(317deg);
-    }
+    display: flex;
+    justify-content: flex-end;
 }
 
 .player {
     grid-area: player;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .chip {

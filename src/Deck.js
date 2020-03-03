@@ -1,10 +1,8 @@
 export default class Deck {
     constructor() {
         this.deck = [];
-		this.dealt_cards = [];
     }
-
-    
+   
     generateDeck(){
         let card = (suit, value) => {
             let name = `${value} of ${suit}`;
@@ -21,18 +19,6 @@ export default class Deck {
         }
     }
 
-    printDeck () {
-		if (this.deck.length === 0) {
-			// console.log('Deck has not been generated. Call generate_deck() on deck object before continuing.')
-		}
-		else {
-			for ( let c = 0; c < this.deck.length; c++ ) {
-	       			// console.log(this.deck[c])
-			}
-		}
-    }
-    
-
     shuffle () {
         let currentIndex = this.deck.length, tempVal, randIndex;
 
@@ -46,20 +32,19 @@ export default class Deck {
     }
 
     deal() {
-        let dealCrad = this.deck.shift();
-        this.dealt_cards.push(dealCrad);
-        //return dealCrad
-        this.ui(dealCrad)
+        return this.deck.shift();
     }
 
-    ui(cardToShow) {
+    ui(cardToShow, str) { 
 
+        let node = document.createElement("div");
         let symbol = this.blackORred(cardToShow.suit);
-
-        let cardUI = `<div class="card">
+        let cardUI
+        if(str !== 'hide') {
+            cardUI = `
                         <div class="card__inner">
                             <div class="card__front">
-                                <img src="./../card_back.png" alt="back card" width="75px" height="100px">
+                                <img src="./../img/card_back.png" alt="back card" width="75px" height="100px">
                             </div>
   
                          <div class="card__back">
@@ -68,16 +53,53 @@ export default class Deck {
                             <span class="card__suit card__suit--bottom">${symbol.symbol}</span>
                          </div>
                         </div>
-                      </div>`;
+        `;
+        }else {
+            cardUI = `
+                        <div class="card__inner-back">
+                            <div class="card__front">
+                                <img src="./../img/card_back.png" alt="back card" width="75px" height="100px">
+                            </div>
+  
+                         <div class="card__back">
+                             <span class="card__suit card__suit--top">${symbol.symbol}</span>
+                             <span class="card__number">${cardToShow.value} </span>
+                            <span class="card__suit card__suit--bottom">${symbol.symbol}</span>
+                         </div>
+                        </div>
+        `;
+        }
 
-        //edit where to add innerHTML
-        document.querySelector("body").innerHTML = cardUI;
 
-        let card = document.querySelector(".card");
-        card.classList.add(`${symbol.color}`);
+        node.classList.add("card");
+        node.classList.add(`${symbol.color}`);
+        node.innerHTML = cardUI;
+        if(str === 'user') {
+            document.querySelector(".player").appendChild(node);
+        }else {
+            document.querySelector(".dealer").appendChild(node);
+        }
+ 
+
+        setTimeout(() => {
+            node.style.backgroundColor = "#fff";
+        }, 1500);
     }
 
-    //check  the color of the card
+    removeUI() {
+        setTimeout(() => {
+            document.querySelector(".player").innerHTML = '';
+            document.querySelector(".dealer").innerHTML = '';
+        }, 5000);
+        
+    }
+
+    flipHideCard(){
+        let hideCard =  document.querySelector('.card__inner-back');
+        hideCard.classList.remove("card__inner-back")
+        hideCard.classList.add("card__inner")
+    }
+
     blackORred(suit) {
         if(suit === "Clubs") {
             return{ 
